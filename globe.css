@@ -1,0 +1,178 @@
+/* =====================================================================
+   GLOBE.CSS — "GLOBAL REACH" 3D SECTION
+   Fully isolated stylesheet. Does not touch style.css or the embedded
+   <style> block in index.html. All selectors are scoped under
+   #global-network / #globe-* / .globe-* to avoid collisions with any
+   existing site rules.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   SECTION SHELL
+   Overrides the generic `section { max-width:1300px; padding:100px 5%;
+   margin:0 auto; }` rule from index.html via higher specificity
+   (#global-network beats the bare element selector), without editing
+   that rule anywhere else.
+--------------------------------------------------------------------- */
+#global-network {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 100vh;
+  height: 100vh;
+  /* Уменьшаем верхний отступ (было 80px), чтобы поднять текст выше */
+  padding: 40px 5% 60px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  overflow: hidden;
+  z-index: 5;
+}
+
+#global-network .section-title,
+#global-network .section-desc {
+  position: relative;
+  z-index: 3;
+}
+
+#global-network-subdesc {
+  margin-top: 10px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.globe-tagline {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 10px;
+  line-height: 1.5;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(15px, 1.6vw, 19px);
+  letter-spacing: 1px;
+  color: var(--text-white, #fff);
+  text-shadow: 0 0 18px rgba(255, 26, 54, 0.35);
+}
+
+/* ---------------------------------------------------------------------
+   STAGE / CANVAS CONTAINER
+--------------------------------------------------------------------- */
+#globe-stage {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  /* Увеличиваем отступ сверху (было 24px), чтобы опустить глобус вниз от текста */
+  margin-top: 80px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+#globe-canvas-container {
+  position: relative;
+  width: 650px;
+  height: 650px;
+  max-width: 90vw;
+  max-height: 90vw;
+  opacity: 1;                 /* visible by default — entrance is animated inside the 3D scene, not via container opacity, so a single failed trigger can never hide the whole thing */
+  pointer-events: none;       /* let cursor/scroll pass through to page */
+}
+
+#globe-canvas-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  #globe-canvas-container {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  #global-network {
+    padding: 100px 5% 40px;
+  }
+  #globe-canvas-container {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   GEO LABELS — glass, floating, red border, blur
+--------------------------------------------------------------------- */
+.globe-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, 14px);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 26, 54, 0.5);
+  background: rgba(13, 9, 16, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 18px rgba(255, 26, 54, 0.25), inset 0 0 12px rgba(255, 26, 54, 0.08);
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  z-index: 4;
+}
+
+/* connector line rising from the top of the label up to the glowing dot on the sphere (label now sits below the marker) */
+.globe-label::after {
+  content: '';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  width: 1px;
+  height: 13px;
+  background: linear-gradient(to top, rgba(255, 26, 54, 0.7), transparent);
+}
+
+/* Southern-hemisphere markers (e.g. New Zealand) sit near the bottom rim of
+   the sphere — placing their label below would push it off the visible
+   globe, so it's flipped to sit above the dot instead. */
+.globe-label--above::after {
+  top: auto;
+  bottom: -13px;
+  background: linear-gradient(to bottom, rgba(255, 26, 54, 0.7), transparent);
+}
+
+@media (max-width: 640px) {
+  .globe-label {
+    padding: 5px 9px;
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   SOFT AMBIENT GLOW BEHIND THE GLOBE (pure CSS, no extra site bg change)
+--------------------------------------------------------------------- */
+#globe-stage::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(60vw, 800px);
+  height: min(60vw, 800px);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 26, 54, 0.10) 0%, rgba(255, 26, 54, 0.03) 45%, transparent 72%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
+}

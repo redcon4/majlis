@@ -1,0 +1,337 @@
+/* ================= MAJLIS WORDMARK ================= */
+.loader-logo-img {
+    width: clamp(220px, 24vw, 340px);
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.loader-bubbles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(680px, 92vw);
+    height: min(520px, 76vh);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.loader-bubble {
+    position: absolute;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, rgba(255,150,165,0.35), rgba(150,10,30,0.4) 55%, rgba(60,0,10,0.05) 100%);
+    filter: blur(6px);
+    opacity: 0;
+    animation: bubblePop 2.6s infinite ease-in-out;
+}
+
+.loader-bubble::before {
+    content: 'M';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: calc(var(--s) * 0.5);
+    color: rgba(255,225,225,0.55);
+}
+
+@keyframes bubblePop {
+    0%   { opacity: 0;    transform: scale(0.2) translateY(18px); filter: blur(6px); }
+    14%  { opacity: 0.5; }
+    50%  { opacity: 0.6;  transform: scale(1) translateY(-8px); filter: blur(7px); }
+    78%  { opacity: 0.45; transform: scale(1.15) translateY(-16px); filter: blur(9px); }
+    90%  { opacity: 0.22; transform: scale(1.6) translateY(-20px); filter: blur(12px); }
+    100% { opacity: 0;    transform: scale(2.1) translateY(-22px); filter: blur(14px); }
+}
+
+
+.header-logo-img {
+    height: 38px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(255, 26, 54, 0.45));
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+.header-logo-img:hover {
+    filter: drop-shadow(0 0 18px rgba(255, 26, 54, 0.7));
+    transform: scale(1.03);
+}
+
+.footer-logo-img {
+    width: clamp(140px, 16vw, 200px);
+    height: auto;
+    margin: 0 auto 12px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(255, 26, 54, 0.4));
+}
+
+.hero-wordmark-img {
+    width: clamp(220px, 26vw, 380px);
+    height: auto;
+    margin: -10px auto 30px;
+    display: block;
+    filter: drop-shadow(0 0 35px rgba(255, 26, 54, 0.55));
+    animation: wordmarkBreathe 6s infinite ease-in-out;
+}
+
+@keyframes wordmarkBreathe {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(255, 26, 54, 0.45)); }
+    50% { transform: scale(1.02); filter: drop-shadow(0 0 45px rgba(255, 26, 54, 0.65)); }
+}
+
+/* Контейнер для глаза */
+.eye-container {
+    position: relative;
+    width: 300px; /* Размер можно менять */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Плавное исчезновение краев в темноту */
+    mask-image: radial-gradient(circle, black 50%, transparent 95%);
+    -webkit-mask-image: radial-gradient(circle, black 50%, transparent 95%);
+}
+
+.hero-eye-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 26, 54, 0.6));
+    animation: eyeFloat 5s infinite ease-in-out; /* Эффект парения */
+}
+
+/* Блик, который пробегает по глазу раз в 8 секунд */
+.eye-overlay-flare {
+    position: absolute;
+    top: 0; 
+    left: -150%;
+    width: 60%; 
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 216, 138, 0.2), transparent);
+    transform: skewX(-25deg);
+    animation: flareMove 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Анимация покачивания */
+@keyframes eyeFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.03); }
+}
+
+/* Анимация блика */
+@keyframes flareMove {
+    0% { left: -150%; }
+    30% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* Дополнительное пульсирующее свечение сзади */
+.hero-logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: var(--primary);
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: pulseRed 4s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulseRed {
+    from { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
+    to { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* ================= CYBER BOWL ================= */
+  .cyber-bowl-wrapper { 
+    position: absolute; 
+    bottom: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 380px; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none; 
+    z-index: 10; 
+  }
+
+  .cyber-bowl-img { 
+    width: 100%; 
+    height: auto; 
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 -10px 25px rgba(255, 26, 54, 0.4)); 
+  }
+
+  .cyber-bowl-glow {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 60px;
+    background: var(--primary);
+    filter: blur(50px);
+    opacity: 0.5;
+    z-index: 1;
+    animation: pulseGlow 4s infinite ease-in-out alternate;
+  }
+  /* ================= CYBER BOWL & SMOKE ================= */
+  footer {
+    padding-bottom: 260px !important;
+  }
+
+  .cyber-bowl-wrapper { 
+    position: absolute; 
+    bottom: -10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 200px; /* Уменьшили чашу */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none; 
+    z-index: 10; 
+  }
+
+  .cyber-bowl-img { 
+    width: 100%; 
+    height: auto; 
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 -10px 25px rgba(255, 26, 54, 0.5)); 
+  }
+
+  .cyber-bowl-glow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 40px;
+    background: var(--primary);
+    filter: blur(40px);
+    opacity: 0.6;
+    z-index: 1;
+    animation: pulseGlow 4s infinite ease-in-out alternate;
+  }
+
+ /* ================= CAMPFIRE SMOKE SYSTEM ================= */
+  footer {
+    padding-bottom: 280px !important;
+  }
+
+  .footer-smoke {
+    position: absolute; 
+    bottom: 30px; 
+    left: 50%; 
+    width: 60px; 
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 26, 54, 0.7) 0%, rgba(20, 5, 8, 0.9) 50%, transparent 80%);
+    border-radius: 50%; 
+    filter: blur(15px); 
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: screen;
+  }
+  
+  .fs-1 { animation: fireSmokeLeft 12s infinite cubic-bezier(0.1, 0.7, 0.3, 1); }
+  .fs-2 { animation: fireSmokeRight 14s infinite cubic-bezier(0.1, 0.7, 0.3, 1) 2s; }
+  .fs-3 { animation: fireSmokeWide 16s infinite cubic-bezier(0.1, 0.7, 0.3, 1) 4s; }
+
+  /* Левая арка дыма (по вашему рисунку) */
+  @keyframes fireSmokeLeft {
+    0% { transform: translate(-50%, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translate(-420px, -320px) scale(4); opacity: 0; }
+  }
+
+  /* Правая арка дыма (по вашему рисунку) */
+  @keyframes fireSmokeRight {
+    0% { transform: translate(-50%, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translate(420px, -320px) scale(4); opacity: 0; }
+  }
+
+  /* Широкий шлейф костра */
+  @keyframes fireSmokeWide {
+    0% { transform: translate(-50%, 0) scale(0.4); opacity: 0; }
+    25% { opacity: 0.6; }
+    100% { transform: translate(0, -380px) scale(5); opacity: 0; }
+  }
+
+/* ================= SITE-WIDE RISING SMOKE (fixed, reaches top of screen) ================= */
+.site-smoke {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2; /* above bg, below header (100) and content (5+) */
+  overflow: hidden;
+}
+
+.smoke-strand {
+  position: absolute;
+  bottom: -5vh;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255,60,80,0.9) 0%, rgba(120,10,20,0.85) 40%, rgba(20,5,8,0.6) 65%, transparent 78%);
+  border-radius: 50%;
+  filter: blur(18px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Левая дуга дыма — поднимается и уходит влево-вверх, как на скетче */
+.ss-left {
+  animation: smokeArcLeft 12s infinite cubic-bezier(0.16, 0.6, 0.3, 1);
+}
+
+/* Правая дуга дыма — зеркально вправо-вверх */
+.ss-right {
+  animation: smokeArcRight 12s infinite cubic-bezier(0.16, 0.6, 0.3, 1);
+  animation-delay: 1s;
+}
+
+/* Центральный широкий шлейф — идёт прямо вверх, до самого верха экрана */
+.ss-center {
+  animation: smokeCenter 13s infinite cubic-bezier(0.16, 0.6, 0.3, 1);
+  animation-delay: 2s;
+  width: 220px;
+  height: 220px;
+}
+
+.ss-delay { animation-delay: 4s; }
+
+@keyframes smokeArcLeft {
+  0%   { transform: translate(-50%, 0) scale(0.5);        opacity: 0; }
+  8%   { opacity: 0.95; }
+  40%  { transform: translate(-220px, -45vh) scale(2.6);  opacity: 0.85; }
+  100% { transform: translate(-480px, -105vh) scale(4.8); opacity: 0; }
+}
+
+@keyframes smokeArcRight {
+  0%   { transform: translate(-50%, 0) scale(0.5);        opacity: 0; }
+  8%   { opacity: 0.95; }
+  40%  { transform: translate(180px, -45vh) scale(2.6);   opacity: 0.85; }
+  100% { transform: translate(420px, -105vh) scale(4.8);  opacity: 0; }
+}
+
+@keyframes smokeCenter {
+  0%   { transform: translate(-50%, 0) scale(0.4);        opacity: 0; }
+  8%   { opacity: 0.85; }
+  50%  { transform: translate(-50%, -55vh) scale(3.2);    opacity: 0.65; }
+  100% { transform: translate(-50%, -108vh) scale(5.8);   opacity: 0; }
+}
